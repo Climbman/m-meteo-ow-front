@@ -5,7 +5,7 @@ require_once 'resources/includes/classes.php';
 
 
 
-$db = new factWDB($_GET['station'], $_GET['parameter'], $_GET['start'], $_GET['end']);
+$db = new FactWDB($_GET['station'], $_GET['parameter'], $_GET['start'], $_GET['end']);
 
 $data = $db->getDB(true);
 
@@ -26,7 +26,7 @@ echo '<div style="display:none;" id="values">' . $values . '</div>';
 echo '<div style="display:none;" id="labels">' . $labels . '</div>';
 ?>
 
-<div style="height:95vw;width:95vw;">
+<div>
 <canvas id="gra">
 <p>A canvas</p>
 </canvas>
@@ -38,11 +38,9 @@ echo '<div style="display:none;" id="labels">' . $labels . '</div>';
  
  labels = document.getElementById("labels").innerHTML;
  labels = labels.split(",");
- console.log(labels);
  
  values = document.getElementById("values").innerHTML;
  values = values.split(",");
- console.log(values);
  
  
 var ctx = document.getElementById('gra').getContext('2d');
@@ -55,7 +53,7 @@ var chart = new Chart(ctx, {
         labels: labels,
         datasets: [{
             label: 'My First dataset',
-            //backgroundColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(255, 255, 255)',
             borderColor: 'rgb(255, 99, 132)',
             data: values
         }]
