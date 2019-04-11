@@ -1,19 +1,29 @@
-#graph_frame {
-	width: 1200px;
-	height: 600px;
+#index_body {
+	background-color: DarkSalmon;
+}
+
+#graph_iframe {
+	width:1200px;
+	height:600px;
 	position: fixed;
 	top: 0px;
 	left: 160px;
+	overflow: hidden;
+	background-color: White;
+	border-right: 4px solid SaddleBrown;
+	border-bottom: 4px solid SaddleBrown;
 }
 
 #sidebar {
-	height: 100%; /* Full-height: remove this if you want "auto" height */
-	width: 160px; /* Set the width of the sidebar */
-	position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-	z-index: 1; /* Stay on top */
-	top: 0; /* Stay at the top */
+	height: 100%;
+	width: 160px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
 	left: 0;
-	background-color: light-gray; /* Black */
-	overflow-x: hidden; /* Disable horizontal scroll */
+	background-color: Blue;
+	overflow-x: hidden;
 	padding-top: 20px;
+	border-right: 4px solid RebeccaPurple;
 }
+

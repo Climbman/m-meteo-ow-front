@@ -15,9 +15,10 @@ $values = implode(',', $data[1]);
 
 ?>
 
-<html>
+<html charset="UTF-8">
 <head>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
         
@@ -26,7 +27,7 @@ echo '<div style="display:none;" id="values">' . $values . '</div>';
 echo '<div style="display:none;" id="labels">' . $labels . '</div>';
 ?>
 
-<div>
+<div id="graph_holder">
 <canvas id="gra">
 <p>A canvas</p>
 </canvas>
@@ -54,7 +55,7 @@ var chart = new Chart(ctx, {
         datasets: [{
             label: 'My First dataset',
             backgroundColor: 'rgb(255, 255, 255)',
-            borderColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 0, 255)',
             data: values
         }]
     },
