@@ -10,12 +10,10 @@ $stations = $stn_data[0];
 $names = $stn_data[1];
 $stn_len = count($stations);
 
+$start = date('Y-m-d', (time() - 86400));
+$end = date('Y-m-d')
 
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,23 +41,29 @@ $stn_len = count($stations);
 		</select>
 
 		<div>Pradžios data</div>
-		<input type="date" name="start" value="<?php echo date('Y-m-d'); ?>" required>
+		<input type="date" name="start" value="<?php echo $start; ?>" required>
 
 		<div>Pabaigos data</div>
-		<input type="date" name="end" value="<?php echo date('Y-m-d'); ?>" required>
-
+		<input type="date" name="end" value="<?php echo $end; ?>" required>
+		<div class="v_separator"></div>
 		<input type="submit" value="Patvirtinti">
-
 		</form>
-
+		<div class="v_separator"></div>
 		<div>
 		<button onClick="resizeIframe('zoom');">Padidinti</button>
 		<button onClick="resizeIframe('shrink');">Sumažinti</button>
 		</div>
+		
+		<div class="v_separator"></div>
+		
+		<div>Pranešimai:</div>
+		<div id="msg_box">
+		<span id="msg_txt"></span>
+		</div>
 
 	</div>
 	
-	<iframe id="graph_iframe" name="graph_frame" scrolling="no" src="graph_frame.php?station=19&parameter=temp&start=<?php echo date('Y-m-d'); ?>&end=<?php echo date('Y-m-d'); ?>"></iframe>
+	<iframe id="graph_iframe" name="graph_frame" scrolling="no" src="graph_frame.php?station=19&parameter=temp&start=<?php echo $start; ?>&end=<?php echo $end; ?>"></iframe>
 
 </div>
 

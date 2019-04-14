@@ -2,6 +2,11 @@
 	background-color: DarkSalmon;
 }
 
+.v_separator {
+	height: 20px;
+	width: 100%;
+}
+
 #graph_iframe {
 	width:1200px;
 	height:600px;
@@ -12,6 +17,10 @@
 	background-color: White;
 	border-right: 4px solid SaddleBrown;
 	border-bottom: 4px solid SaddleBrown;
+}
+
+.graph_data {
+	display: none;
 }
 
 #sidebar {
@@ -26,4 +35,14 @@
 	padding-top: 20px;
 	border-right: 4px solid RebeccaPurple;
 }
+
+#msg_box {
+	height: 150px;
+	width: 90%;
+	background-color: white;
+	overflow-y: scroll;
+	overflow-x: disabled;
+}
+
+
 
