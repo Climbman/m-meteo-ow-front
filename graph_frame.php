@@ -1,7 +1,7 @@
 <?php
 
-require_once 'resources/includes/config.php';
-require_once 'resources/includes/classes.php';
+require_once 'includes/config.php';
+require_once 'includes/classes.php';
 
 
 
@@ -23,12 +23,15 @@ else {
 }
 $msg .= '<br />'; 
 
+$param = $_GET['parameter'];
+$param_name = $_params[$_GET['parameter']];
+
 
 
 ?>
 <html charset="UTF-8">
 <head>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script type="text/javascript" src="resources/js/Chart.bundle.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
@@ -37,8 +40,11 @@ $msg .= '<br />';
 echo '<div class="graph_data">';
 echo '<div id="values">' . $values . '</div>';
 echo '<div id="labels">' . $labels . '</div>';
-echo '<div id="graph_name">' . $_params[$_GET['parameter']] . '</div>';
+echo '<div id="graph_name">' . $param_name . '</div>';
 echo '<div id="message">' . $msg . '</div>';
+echo '<div id="line_color">' . $_graph_settings[$param]['line_color'] . '</div>';
+echo '<div id="point_color">' . $_graph_settings[$param]['point_color'] . '</div>';
+echo '<div id="show_line">' . $_graph_settings[$param]['show_line'] . '</div>';
 echo '</div>';
 ?>
 
@@ -63,6 +69,10 @@ labels = labels.split(",");
 values = document.getElementById("values").innerHTML;
 values = values.split(",");
 
+var graph_label = document.getElementById("graph_name").innerHTML;
+var line_color = document.getElementById("line_color").innerHTML;
+var point_color = document.getElementById("point_color").innerHTML;
+var line_display = document.getElementById("show_line").innerHTML == '0' ? false : true;
  
 var ctx = document.getElementById('gra').getContext('2d');
 var chart = new Chart(ctx, {
@@ -70,9 +80,15 @@ var chart = new Chart(ctx, {
     data: {
         labels: labels,
         datasets: [{
-            label: document.getElementById("graph_name").innerHTML,
+            label: graph_label,
             fill: false,
-            borderColor: 'rgb(255, 0, 255)',
+            borderColor: line_color,
+            pointBackgroundColor: point_color,
+            pointBorderColor: point_color,
+            lineTension: 0,
+            borderWidth: 2,
+            pointRadius: 2,
+            showLine: line_display,
             data: values
         }]
     },

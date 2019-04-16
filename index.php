@@ -1,7 +1,7 @@
 <?php
 
-require_once 'resources/includes/config.php';
-require_once 'resources/includes/classes.php';
+require_once 'includes/config.php';
+require_once 'includes/classes.php';
 
 $options = new Options;
 
@@ -10,8 +10,8 @@ $stations = $stn_data[0];
 $names = $stn_data[1];
 $stn_len = count($stations);
 
-$start = date('Y-m-d', (time() - 86400));
-$end = date('Y-m-d')
+$start = date('Y-m-d');
+$end = date('Y-m-d', (time() + 86400));
 
 ?>
 <!DOCTYPE html>
@@ -66,6 +66,8 @@ $end = date('Y-m-d')
 	<iframe id="graph_iframe" name="graph_frame" scrolling="no" src="graph_frame.php?station=19&parameter=temp&start=<?php echo $start; ?>&end=<?php echo $end; ?>"></iframe>
 
 </div>
+
+<script>setIframeSize();</script>
 
 </body>
 </html>
