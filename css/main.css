@@ -44,5 +44,37 @@
 	overflow-x: disabled;
 }
 
+	
+#login_button {
+	position: relative;
+	height: 50px;
+	width: 100px;
+	left: 50px;
+}
+
+.login_txt_field {
+	display: block;
+	height: 20px;
+	width: 200px;
+}
+
+#login_form {
+	display: block;
+    position: relative;
+    top: 200px;
+    left: 200px;
+}
+
+#login_form_holder {
+	margin: auto;
+	width: 600px;
+	height: 600px;
+	border: 4px solid RebeccaPurple;
+}
+
+#login_body {
+	background-color: DarkSalmon;
+}
+
 
 

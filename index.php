@@ -38,19 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-<body style="background-color: DarkSalmon;">
-<div style="margin: auto; width: 600px; height: 600px; border: 4px solid RebeccaPurple;">
-<form action="" method="post">
-    <div style="margin: auto;">
-    <input type="text" name="user" placeholder="Vartotojas" required>
-    </div>
-    <div style="margin: auto;">
-    <input type="password" name="pass" placeholder="Slaptažodis" required>
-    </div>
-    <div style="margin: auto;">
-    <input type="submit" value="Patvirtinti">
-    </div>
+<body id="login_body">
+<div id="login_form_holder">
+<form id="login_form" action="" method="post">
+    <h1>Prisijungti</h1>
+    <input class="login_txt_field" type="text" name="user" placeholder="Vartotojas" required>
+    <input class="login_txt_field" type="password" name="pass" placeholder="Slaptažodis" required>
+    <input id="login_button" type="submit" value="Patvirtinti">
 </form>
 </div>
 </body>
