@@ -21,7 +21,7 @@ $end = date('Y-m-d', (time() + 86400));
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <script type="text/javascript" src="js/functions.js"></script>
 </head>
-<body id="index_body">
+<body id="index_body" onresize="setIframeSize()">
 
 <div id="main_holder">
 
