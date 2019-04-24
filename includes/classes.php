@@ -9,6 +9,7 @@ class FactWDB {
         $this->end_date = $date2;
         
         $this->dbserver = $GLOBALS['_dbserver'];
+        $this->port = $GLOBALS['_port'];
         $this->db = $GLOBALS['_db'];
         $this->user = $GLOBALS['_dbuser'];
         $this->pass = $GLOBALS['_dbpass'];
@@ -17,7 +18,7 @@ class FactWDB {
     
     function getDB($switch) {
         
-        $conn = new \mysqli($this->dbserver, $this->user, $this->pass, $this->db);
+        $conn = new mysqli($this->dbserver, $this->user, $this->pass, $this->db, $this->port);
         
         $sql = '
         SELECT date_time, ' . $this->param . '
@@ -44,36 +45,37 @@ class FactWDB {
 
 
 class Options {
-	
+    
     function __construct() {
         
         $this->dbserver = $GLOBALS['_dbserver'];
+        $this->port = $GLOBALS['_port'];
         $this->db = $GLOBALS['_db'];
         $this->user = $GLOBALS['_dbuser'];
         $this->pass = $GLOBALS['_dbpass'];
     }
     
     function getStations() {
-		
-		$conn = new \mysqli($this->dbserver, $this->user, $this->pass, $this->db);
-		
-		$sql = '
-		SELECT DISTINCT station_id, stn_name
-		FROM m_fact_weather;';
-		
-		$result = $conn->query($sql);
-		
-		$stations = array();
-		$names = array();
-		if ($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {
-				$stations[] = $row['station_id'];
-				$names[] = $row['stn_name'];
-			}
-		}
-		
-		return array($stations, $names);
-	}
+        
+        $conn = new mysqli($this->dbserver, $this->user, $this->pass, $this->db, $this->port);
+        
+        $sql = '
+        SELECT DISTINCT station_id, stn_name
+        FROM m_fact_weather;';
+        
+        $result = $conn->query($sql);
+        
+        $stations = array();
+        $names = array();
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $stations[] = $row['station_id'];
+                $names[] = $row['stn_name'];
+            }
+        }
+        
+        return array($stations, $names);
+    }
 }
-		
+        
 ?>

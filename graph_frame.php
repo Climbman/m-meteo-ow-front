@@ -15,11 +15,11 @@ $values = implode(',', $data[1]);
 
 
 if (count($data[0]) == count($data[0])) {
-	$msg = 'Taškų ir etikečių skaičius sutampa: ';
-	$msg .= '(' . count($data[1]) . '=' . count($data[0]) . ')';
+    $msg = 'Taškų ir etikečių skaičius sutampa: ';
+    $msg .= '(' . count($data[1]) . '=' . count($data[0]) . ')';
 }
 else {
-	$msg = 'Taškų ir etikečių skaičius nesutampa';
+    $msg = 'Taškų ir etikečių skaičius nesutampa';
 }
 $msg .= '<br />'; 
 
@@ -97,5 +97,5 @@ var chart = new Chart(ctx, {
 </script>
 
 </body>
-	
+    
 </html>

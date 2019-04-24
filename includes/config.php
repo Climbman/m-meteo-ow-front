@@ -1,11 +1,12 @@
 <?php
 
-$_dbserver = 'localhost';
+$_dbserver = '127.0.0.1';
 $_db = 'meteo';
+$_port = '3306';
 $_dbuser = 'webuser';
 $_dbpass = '';
 
-$_USERS = array('admin' => '');
+$_USERS = array('admin' => 'pass');
 
 $_params = array('temp' => 'Temperatūra',
                 'press' => 'Slėgis',

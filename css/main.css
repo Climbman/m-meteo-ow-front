@@ -1,80 +1,80 @@
 #index_body {
-	background-color: DarkSalmon;
+    background-color: DarkSalmon;
 }
 
 .v_separator {
-	height: 20px;
-	width: 100%;
+    height: 20px;
+    width: 100%;
 }
 
 #graph_iframe {
-	width:1200px;
-	height:600px;
-	position: fixed;
-	top: 0px;
-	left: 160px;
-	overflow: hidden;
-	background-color: White;
-	border-right: 4px solid SaddleBrown;
-	border-bottom: 4px solid SaddleBrown;
+    width:1200px;
+    height:600px;
+    position: fixed;
+    top: 0px;
+    left: 160px;
+    overflow: hidden;
+    background-color: White;
+    border-right: 4px solid SaddleBrown;
+    border-bottom: 4px solid SaddleBrown;
 }
 
 .graph_data {
-	display: none;
+    display: none;
 }
 
 #sidebar {
-	height: 100%;
-	width: 160px;
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	background-color: Blue;
-	overflow-x: hidden;
-	padding-top: 20px;
-	border-right: 4px solid RebeccaPurple;
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: Blue;
+    overflow-x: hidden;
+    padding-top: 20px;
+    border-right: 4px solid RebeccaPurple;
 }
 
 #msg_box {
-	height: 150px;
-	width: 90%;
-	background-color: white;
-	overflow-y: scroll;
-	overflow-x: disabled;
+    height: 150px;
+    width: 90%;
+    background-color: white;
+    overflow-y: scroll;
+    overflow-x: disabled;
 }
 
-	
+    
 #login_button {
-	position: relative;
-	height: 50px;
-	width: 100px;
-	left: 50px;
+    position: relative;
+    height: 50px;
+    width: 100px;
+    left: 50px;
 }
 
 .login_txt_field {
-	display: block;
-	height: 20px;
-	width: 200px;
+    display: block;
+    height: 20px;
+    width: 200px;
 }
 
 #login_form {
-	display: block;
+    display: block;
     position: relative;
     top: 200px;
     left: 200px;
 }
 
 #login_form_holder {
-	margin: auto;
-	width: 600px;
-	height: 600px;
-	border: 4px solid RebeccaPurple;
-	background-color: cyan;
+    margin: auto;
+    width: 600px;
+    height: 600px;
+    border: 4px solid RebeccaPurple;
+    background-color: cyan;
 }
 
 #login_body {
-	background-color: DarkSalmon;
+    background-color: DarkSalmon;
 }
 
 h1 {
@@ -84,7 +84,7 @@ h1 {
     width: 200px;
     height: 60px;
 }
-}
+
 
 
 
