@@ -9,12 +9,9 @@ $db = new FactWDB($_GET['station'], $_GET['parameter'], $_GET['start'], $_GET['e
 
 $data = $db->getDB(true);
 
-
-$labels = implode(',', $data[0]);
-$values = implode(',', $data[1]);
-
-
-if (count($data[0]) == count($data[0])) {
+$good_cnt = false;
+if (count($data[0]) == count($data[1])) {
+    $good_cnt = true;
     $msg = 'Taškų ir etikečių skaičius sutampa: ';
     $msg .= '(' . count($data[1]) . '=' . count($data[0]) . ')';
 }
@@ -22,6 +19,47 @@ else {
     $msg = 'Taškų ir etikečių skaičius nesutampa';
 }
 $msg .= '<br />'; 
+
+if ($good_cnt) {
+    $dates = array();
+    $values = array();
+    
+    $point_cnt = count($data[0]);
+    
+    $i = 0;
+    while ($i < $point_cnt) {
+        
+        
+        $dates[] = $data[0][$i];
+        $values[] = $data[1][$i];
+        
+        if ($i == ($point_cnt - 1)) {
+            break;
+        }
+        
+        $date1 = strtotime($data[0][$i]);
+        $date2 = strtotime($data[0][$i + 1]);
+        $diff = $date2 - $date1;
+        $seconds = 3600;
+        if (($diff > $seconds) && ($diff%$seconds == 0)) {
+            $hours = $diff / $seconds;
+            
+            $j = 1;
+            while ($j <= $hours) {
+                $new_date = date("Y-m-d H:i:s", $date1 + ($seconds * $j));
+                $dates[] = $new_date;
+                $values[] = "null";
+                $j++;
+            }
+        }
+        $i++;
+    }
+}
+
+
+$labels = implode(',', $dates);
+$vals = implode(',', $values);
+
 
 $param = $_GET['parameter'];
 $param_name = $_params[$_GET['parameter']];
@@ -38,7 +76,7 @@ $param_name = $_params[$_GET['parameter']];
         
 <?php
 echo '<div class="graph_data">';
-echo '<div id="values">' . $values . '</div>';
+echo '<div id="values">' . $vals . '</div>';
 echo '<div id="labels">' . $labels . '</div>';
 echo '<div id="graph_name">' . $param_name . '</div>';
 echo '<div id="message">' . $msg . '</div>';
