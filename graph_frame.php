@@ -55,7 +55,10 @@ if ($good_cnt) {
         $i++;
     }
 }
-
+else {
+    $dates = $data[0];
+    $values = $data[1];
+}
 
 $labels = implode(',', $dates);
 $vals = implode(',', $values);
