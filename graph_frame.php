@@ -45,7 +45,7 @@ if ($good_cnt) {
             $hours = $diff / $seconds;
             
             $j = 1;
-            while ($j <= $hours) {
+            while ($j < $hours) {
                 $new_date = date("Y-m-d H:i:s", $date1 + ($seconds * $j));
                 $dates[] = $new_date;
                 $values[] = "null";
