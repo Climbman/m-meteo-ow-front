@@ -8,12 +8,16 @@ function resizeIframe(action) {
     
     var wh_ratio = current_height / current_width;
     
+    var new_height;
+    var new_width;
+    
+    
     if (action == "zoom") {
-        var new_height = current_height + (200 * wh_ratio);
-        var new_width = current_width + 200;
+        new_height = current_height + (200 * wh_ratio);
+        new_width = current_width + 200;
     } else {
-        var new_height = current_height - (200 * wh_ratio);
-        var new_width = current_width - 200;
+        new_height = current_height - (200 * wh_ratio);
+        new_width = current_width - 200;
     }
     
     new_height = Math.floor(new_height);

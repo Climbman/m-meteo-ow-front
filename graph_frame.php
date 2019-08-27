@@ -10,6 +10,14 @@ $db = new FactWDB($_GET['station'], $_GET['parameter'], $_GET['start'], $_GET['e
 $data = $db->getDB(true);
 
 $good_cnt = false;
+
+$msg = "";
+
+$dates = array();
+$values = array();
+
+$point_cnt = 0;
+
 if (count($data[0]) == count($data[1])) {
     $good_cnt = true;
     $msg = 'Taškų ir etikečių skaičius sutampa: ';
@@ -21,8 +29,6 @@ else {
 $msg .= '<br />'; 
 
 if ($good_cnt) {
-    $dates = array();
-    $values = array();
     
     $point_cnt = count($data[0]);
     
