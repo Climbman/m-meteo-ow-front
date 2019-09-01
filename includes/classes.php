@@ -2,7 +2,7 @@
 
 class FactWDB {
     
-    function __construct($stn_id, $param, $date1, $date2) {
+    function __construct(int $stn_id, string $param, string $date1, string $date2) {
         $this->stn = $stn_id;
         $this->param = $param;
         $this->start_date = $date1;
@@ -16,7 +16,7 @@ class FactWDB {
     }
     
     
-    function getDB($switch) {
+    function getDB(bool $parse = false) {
         
         $conn = new mysqli($this->dbserver, $this->user, $this->pass, $this->db, $this->port);
         
@@ -28,17 +28,19 @@ class FactWDB {
         
         $result = $conn->query($sql);
         
-        if (isset($switch) && $switch) { 
-            $values = array();
-            $labels = array();
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    $values[] = $row[$this->param];
-                    $labels[] = $row['date_time'];
-                }
-            }
+        
+        if (!$parse) {
+            return $result;
         }
 
+        $values = array();
+        $labels = array();
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $values[] = $row[$this->param];
+                $labels[] = $row['date_time'];
+            }
+        }
         return array($labels, $values);
     }
 }
@@ -73,7 +75,6 @@ class Options {
                 $names[] = $row['stn_name'];
             }
         }
-        
         return array($stations, $names);
     }
 }
