@@ -4,7 +4,6 @@ require_once 'includes/config.php';
 require_once 'includes/classes.php';
 
 
-
 $db = new FactWDB($_GET['station'], $_GET['parameter'], $_GET['start'], $_GET['end']);
 
 $data = $db->getDB(true);

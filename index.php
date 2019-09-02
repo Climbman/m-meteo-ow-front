@@ -10,13 +10,7 @@ function input_validation($data) {
   return $data;
 }
 
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
-
-    if (empty($_POST)) {
-        exit('Empty POST');
-    }
 
     if (!isset($_POST['user']) || !isset($_POST['pass'])) {
         exit('Incomplete login data');
@@ -28,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_USERS[$user])) {
         if ($_USERS[$user] == $pass) {
             $_SESSION['user'] = $user;
-            echo '<html><head><script>window.location.href = "main.php";</script></head></html>';
+            echo '<html><head><script>window.location.href="main.php";</script></head></html>';
         }
     }
 }
@@ -51,4 +45,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 </body>
 </html>
-
