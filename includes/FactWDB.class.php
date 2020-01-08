@@ -2,21 +2,19 @@
 class FactWDB
 {
     
-    
     protected $db;
-    
     
     public $stations = [];
     public $station_names = [];
 
-    function __construct(mysqli $conn) {
+    function __construct(mysqli $conn): void {
         
-        $opt_qry = "
+        $opt_qry = '
             SELECT DISTINCT
                 station_id,
                 stn_name
             FROM m_fact_weather;
-        ";
+            ';
         
         $this->db = $conn;
         
@@ -33,19 +31,35 @@ class FactWDB
         
     }
     
-    function getWeatherData(int $station_id, string $parameter, string $start_date, string $end_date) {
+    function getWeatherData(int $station_id, string $start_date, string $end_date): array {
         
-        $data_qry = "
+        $data_qry = '
             SELECT
                 date_time,
-                " . $parameter . "
+                cond_code,
+                cond_txt,
+                temp,
+                press,
+                wind_dir,
+                wind_gust,
             FROM m_fact_weather
             WHERE
-                station_id = " . $station_id . "
-                AND (date_time between '" . $start_date . "' and '" . $end_date . "'
-            ;";
+                station_id = ?
+                AND date_time BETWEEN ? AND ?
+                AND bad = 0;
+            ';
         
-        //mysql prepare
+        $result = [];
+        
+        $sql = $this->conn->prepare($data_qry);
+        $sql->bind_param('iss', $station_id, $end_date);
+        $sql->execute();
+        
+        while ($row = $sql->fetch_assoc()) {
+            $result[] = $row;
+        }
+        
+        return $result;
         
     }
     
