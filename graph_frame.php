@@ -1,7 +1,7 @@
 <?php
-require_once 'includes/session.php';
-require_once 'includes/config.php';
-require_once 'includes/classes.php';
+require_once 'resources/session.php';
+require_once 'resources/config.php';
+require_once 'resources/classes.php';
 
 
 $db = new FactWDB($_GET['station'], $_GET['parameter'], $_GET['start'], $_GET['end']);
@@ -77,7 +77,7 @@ $param_name = $_params[$_GET['parameter']];
 ?>
 <html charset="UTF-8">
 <head>
-<script type="text/javascript" src="resources/js/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="resources/Chart.bundle.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>

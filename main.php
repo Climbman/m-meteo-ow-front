@@ -1,7 +1,7 @@
 <?php
-require_once 'includes/session.php';
-require_once 'includes/config.php';
-require_once 'includes/classes.php';
+require_once 'resources/session.php';
+require_once 'resources/config.php';
+require_once 'resources/classes.php';
 
 $options = new Options;
 
@@ -19,7 +19,7 @@ $end = date('Y-m-d', (time() + 86400));
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/main.css">
-<script type="text/javascript" src="js/functions.js"></script>
+<script type="text/javascript" src="resources/functions.js"></script>
 </head>
 <body id="index_body" onresize="setIframeSize()">
 
