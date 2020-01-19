@@ -5,7 +5,6 @@ class FactWDB
     protected $db;
     
     public $stations = [];
-    public $station_names = [];
 
     function __construct(mysqli $conn): void {
         
@@ -25,8 +24,7 @@ class FactWDB
         }
         
         while($row = $result->fetch_assoc()) {
-            $this->stations[] = $row['station_id'];
-            $this->station_names[] = $row['stn_name'];
+            $this->stations[(int)$row['station_id']] = row['stn_name'];
         }
         
     }
