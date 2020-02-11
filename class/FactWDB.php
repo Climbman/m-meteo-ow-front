@@ -1,37 +1,81 @@
 <?php
+/**
+ * Class for retrieving data from DB.
+ * 
+ * @author laurynas
+ *
+ */
 class FactWDB
 {
+    /**
+     * 
+     * @var mysqli
+     */
+    protected $db = null;
     
-    protected $db;
-    
+    /**
+     * 
+     * @var array
+     */
     public $stations = [];
 
-    function __construct(mysqli $conn): void {
+    
+    function __construct(mysqli $conn) {
+        $this->db = $conn;
+    }
+    
+    
+    /**
+     * Returns array of station numbers as keys and names as values.
+     * 
+     * 
+     * @throws Exception
+     * @return array
+     */
+    public function getStations(): ?array {
         
-        $opt_qry = '
+        if (!$this->db) {
+            return null;
+        }
+        
+        $stations = [];
+        
+        $result = $this->db->query('
             SELECT DISTINCT
                 station_id,
                 stn_name
             FROM m_fact_weather;
-            ';
-        
-        $this->db = $conn;
-        
-        $result = $this->db->query($opt_qry);
+        ');
         
         if ($result->num_rows < 1) {
             throw new Exception('No result set');
         }
         
         while($row = $result->fetch_assoc()) {
-            $this->stations[(int)$row['station_id']] = row['stn_name'];
+            $stations[(int)$row['station_id']] = row['stn_name'];
         }
         
+        return $stations;
     }
     
-    function getWeatherData(int $station_id, string $start_date, string $end_date): array {
+    
+    /**
+     * 
+     * @param int $station_id
+     * @param string $start_date
+     * @param string $end_date
+     * 
+     * @return array
+     */
+    public function getWeatherData(int $station_id, string $start_date, string $end_date): ?array {
         
-        $data_qry = '
+        if (!$this->db) {
+            return null;
+        }
+        
+        $result = [];
+        
+        $sql = $this->conn->prepare('
             SELECT
                 date_time,
                 cond_code,
@@ -45,11 +89,8 @@ class FactWDB
                 station_id = ?
                 AND date_time BETWEEN ? AND ?
                 AND bad = 0;
-            ';
+        ');
         
-        $result = [];
-        
-        $sql = $this->conn->prepare($data_qry);
         $sql->bind_param('iss', $station_id, $end_date);
         $sql->execute();
         
@@ -58,8 +99,5 @@ class FactWDB
         }
         
         return $result;
-        
     }
-    
-    
 }
