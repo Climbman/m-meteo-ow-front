@@ -47,29 +47,4 @@ Class Config {
         return array_keys(self::$param_names);
     }
     
-    public static function getGraphConfJson(string $param): ?string {
-        if (!isset(self::$graph_settings[$param])) {
-            return null;
-        }
-        return
-        '{
-            type: "line",
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: graph_label,
-                    fill: false,
-                    borderColor: "' . self::$graph_settings[$param]['line_color'] . '",
-                    pointBackgroundColor: "' . self::$graph_settings[$param]['point_color'] . '",
-                    pointBorderColor: "' . self::$graph_settings[$param]['point_color'] . '",
-                    lineTension: 0,
-                    borderWidth: 2,
-                    pointRadius: 2,
-                    showLine: ' . self::$graph_settings[$param]['show_line'] . ',
-                    data: values
-                }]
-            },
-            options: {}
-        }';
-    }
 }

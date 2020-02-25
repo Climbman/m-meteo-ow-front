@@ -43,3 +43,26 @@ function setIframeSize() {
     document.getElementById("graph_iframe").style.height = frame_height + "px";
     document.getElementById("graph_iframe").style.width = frame_width + "px";
 }
+
+function getGraphConfig(labels, values, graph_label, line_color, point_color, line_display) {
+    let graph_config = {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: graph_label,
+                fill: false,
+                borderColor: line_color,
+                pointBackgroundColor: point_color,
+                pointBorderColor: point_color,
+                lineTension: 0,
+                borderWidth: 2,
+                pointRadius: 2,
+                showLine: line_display,
+                data: values
+            }]
+        },
+        options: {}
+    }
+    return graph_config;
+}
