@@ -44,6 +44,16 @@ function setIframeSize() {
     document.getElementById("graph_iframe").style.width = frame_width + "px";
 }
 
+/**
+ * Returns graph config objects
+ * @param labels {array}
+ * @param values {array}
+ * @param graph_label {string}
+ * @param line_color {string}
+ * @param point_color {string}
+ * @param line_display {boolean}
+ * @returns graph_config {object}
+ */
 function getGraphConfig(labels, values, graph_label, line_color, point_color, line_display) {
     let graph_config = {
         type: 'line',
@@ -65,4 +75,14 @@ function getGraphConfig(labels, values, graph_label, line_color, point_color, li
         options: {}
     }
     return graph_config;
+}
+
+/**
+ * Generates graph on given canvas element
+ * @param graph_config {object}
+ * @param canvas {object}
+ * @returns {void}
+ */
+function generateGraph(graph_config, canvas) {
+    
 }
