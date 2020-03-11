@@ -15,7 +15,7 @@ if (
 }
 
 if (!isset($_SESSION['user'])) {
-    require_once 'templates/login.php';
+    require_once 'login.php';
     exit();
 }
 

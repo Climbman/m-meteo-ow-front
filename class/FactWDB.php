@@ -91,7 +91,7 @@ class FactWDB
                 AND bad = 0;
         ');
         
-        $sql->bind_param('iss', $station_id, $end_date);
+        $sql->bind_param('iss', $station_id, $start_date, $end_date);
         $sql->execute();
         
         while ($row = $sql->fetch_assoc()) {

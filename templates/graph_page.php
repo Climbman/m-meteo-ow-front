@@ -2,7 +2,8 @@
 if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
     exit;
 }
-
+//default to prevent ide complaints
+$default_data['default'] = null;
 $default_data_keys = ['labels', 'values', 'graph_label', 'line_color', 'point_color', 'line_display'];
 
 foreach ($default_data_keys as $key) {
@@ -21,7 +22,7 @@ foreach ($default_data_keys as $key) {
     <body>
         <div class="header"></div>
         <div class="graph-block">
-            <div id="default_graph_data" style="display:none;" data-points="<?= $default_data['points'] ?>" data-labels="<?= $default_data['labels'] ?>"></div>
+            <div id="default_graph_data" style="display:none;" data-points="<?= $default_data['values'] ?>" data-labels="<?= $default_data['labels'] ?>"></div>
             <div id="default_graph_config" style="display:none;" data-label="<?= $default_data['graph_label'] ?>"></div>
         </div>
         <div class="footer"></div>
