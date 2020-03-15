@@ -81,8 +81,10 @@ function getGraphConfig(labels, values, graph_label, line_color, point_color, li
  * Generates graph on given canvas element
  * @param graph_config {object}
  * @param canvas {object}
- * @returns {void}
+ * @returns chart {object}
  */
 function generateGraph(graph_config, canvas) {
-    
+    let ctx = canvas.getContext('2d');
+    let chart = new Chart(ctx, graph_config);
+    return chart;
 }

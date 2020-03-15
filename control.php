@@ -15,9 +15,11 @@ if (
 }
 
 if (!isset($_SESSION['user'])) {
-    require_once 'login.php';
+    require_once Config::$page_links['login'];
     exit();
 }
 
 //render default
+require_once Config::$page_links['graph'];
+exit();
 ?>

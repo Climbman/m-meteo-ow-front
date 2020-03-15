@@ -9,6 +9,11 @@ Class Config {
         'pass' => 'durele5'
     ];
     
+    public static $page_links = [
+        'login' => 'login.php',
+        'graph' => 'templates/graph_page.php'
+    ];
+    
     public static $app_users = [
         'admin' => 'pass'
     ];
