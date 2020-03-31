@@ -4,13 +4,6 @@ if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
 }
 //default to prevent ide complaints
 $default_data['default'] = null;
-$default_data_keys = ['labels', 'values', 'graph_label', 'line_color', 'point_color', 'line_display'];
-
-foreach ($default_data_keys as $key) {
-    if (!isset($default_data[$key])) {
-        exit('Some data not set');
-    }
-}
 
 ?>
 <!DOCTYPE HTML>

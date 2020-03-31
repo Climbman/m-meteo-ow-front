@@ -48,6 +48,10 @@ Class Config {
         ]
     ];
     
+    public static $default_parameter = [
+        'parameter' => 'temp'
+    ];
+    
     public static function getMetParamNames(): array {
         return array_keys(self::$param_names);
     }

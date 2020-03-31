@@ -1,4 +1,8 @@
 <?php
+/*
+ * 
+ */
+
 spl_autoload_register(function ($class) {
     include 'class/' . $class . '.php';
 });
@@ -20,6 +24,20 @@ if (!isset($_SESSION['user'])) {
 }
 
 //render default
-require_once Config::$page_links['graph'];
+
+$db = new mysqli(
+    Config::$dbconf['srv'],
+    Config::$dbconf['usr'],
+    Config::$dbconf['pass'],
+    Config::$dbconf['db'],
+    Config::$dbconf['port']
+);
+
+$data = new FactWDB($db);
+
+$stations = $data->getStations();
+
+
+
 exit();
 ?>
