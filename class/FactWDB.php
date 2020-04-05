@@ -52,7 +52,7 @@ class FactWDB
         }
         
         while($row = $result->fetch_assoc()) {
-            $stations[(int)$row['station_id']] = row['stn_name'];
+            $stations[(int)$row['station_id']] = $row['stn_name'];
         }
         
         return $stations;
@@ -75,7 +75,7 @@ class FactWDB
         
         $result = [];
         
-        $sql = $this->conn->prepare('
+        $sql = $this->db->prepare('
             SELECT
                 date_time,
                 cond_code,
@@ -83,7 +83,7 @@ class FactWDB
                 temp,
                 press,
                 wind_dir,
-                wind_gust,
+                wind_gust
             FROM m_fact_weather
             WHERE
                 station_id = ?
@@ -93,8 +93,9 @@ class FactWDB
         
         $sql->bind_param('iss', $station_id, $start_date, $end_date);
         $sql->execute();
+        $res = $sql->get_result();
         
-        while ($row = $sql->fetch_assoc()) {
+        while ($row = $res->fetch_assoc()) {
             $result[] = $row;
         }
         

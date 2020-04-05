@@ -1,21 +1,21 @@
 <?php
 Class View
 {
-    /*
+    /**
      * Meteorological paramers name array
      * 
      * @var string[]
      */
     protected $parameter_names = null;
     
-    /*
+    /**
      * Meteoroligical station (location) names array
      * 
-     * @var string[int]
+     * @var string[]
      */
     protected $stations = null;
     
-    /*
+    /**
      * Graph data array holding config and values
      * 
      * $graph_data array keys => values:
@@ -31,14 +31,14 @@ Class View
     protected $graph_data = null;
     
     
-    /*
+    /**
      * Location of template to render
      * 
      * @var string
      */
     protected $template_location = null;
     
-    /*
+    /**
      * default $graph_data array keys for checks
      * 
      * @var array
@@ -47,8 +47,8 @@ Class View
     
     
     
-    /*
-     * 
+    /**
+     * Constructor.
      * 
      * @param string $parameter
      * @param array $stations
@@ -61,7 +61,10 @@ Class View
         $this->template_location = $template_location;
     }
     
-    /*
+    /**
+     * Method for rendering default template.
+     * 
+     * Performs basic checks to provide default template with non-empty values.
      * 
      * @return bool
      */

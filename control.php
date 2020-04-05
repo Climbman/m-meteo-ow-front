@@ -1,5 +1,6 @@
 <?php
-/*
+/**
+ * Main controller.
  * 
  */
 
@@ -32,12 +33,19 @@ $db = new mysqli(
     Config::$dbconf['db'],
     Config::$dbconf['port']
 );
+$db->set_charset('utf8');
 
 $data = new FactWDB($db);
 
 $stations = $data->getStations();
 
+$start_date = date('Y-m-d');
+$end_date = date('Y-m-d', (time() + 86400));
 
+$graph_data = $data->getWeatherData(Config::$defaults['station'], $start_date, $end_date);
+
+var_dump($stations);
+var_dump($graph_data);
 
 exit();
 ?>

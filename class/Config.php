@@ -1,11 +1,12 @@
 <?php
-Class Config {
+Class Config
+{
 
     public static $dbconf = [
-        'srv' => '127.0.0.1',
+        'srv' => 'localhost',
         'db' => 'meteo',
-        'port' => '29902',
-        'usr' => 'webuser',
+        'port' => '3306',
+        'usr' => 'webusr',
         'pass' => 'durele5'
     ];
     
@@ -48,8 +49,9 @@ Class Config {
         ]
     ];
     
-    public static $default_parameter = [
-        'parameter' => 'temp'
+    public static $defaults = [
+        'parameter' => 'temp',
+        'station' => 19
     ];
     
     public static function getMetParamNames(): array {
