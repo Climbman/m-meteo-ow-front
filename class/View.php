@@ -49,26 +49,37 @@ Class View
     
     /**
      * Constructor.
-     * 
-     * @param string $parameter
-     * @param array $stations
-     * @param array $graph_data
      */
-    public function __construct(array $parameter_names, string $default_parameter, array $stations, array $graph_data, string $template_location) {
-        $this->parameter_names = $parameter_names;
-        $this->stations = $stations;
-        $this->graph_data = $graph_data;
-        $this->template_location = $template_location;
+    public function __construct() {
+
     }
+    
+    /**
+     * Renders login page.
+     */
+    public function renderLoginPage(): void {
+        require_once Config::$page_links['login'];
+    }
+    
     
     /**
      * Method for rendering default template.
      * 
      * Performs basic checks to provide default template with non-empty values.
      * 
+     * @param array $parameter_names
+     * @param string $default_parameter
+     * @param array $stations
+     * @param array $graph_data
+     * @param string $template_location
      * @return bool
      */
-    public function renderMainView(): bool {
+    public function renderMainView(array $parameter_names, string $default_parameter, array $stations, array $graph_data, string $template_location): bool {
+        
+        $this->parameter_names = $parameter_names;
+        $this->stations = $stations;
+        $this->graph_data = $graph_data;
+        $this->template_location = $template_location;
         
         foreach ($this->default_data_keys as $key) {
             if (!isset($this->graph_data[$key])) {
@@ -85,16 +96,25 @@ Class View
         
         
         //Parameters for template
-        $parameter_names = $this->parameter_names;
         $default_parameter = $this->default_parameter;
-        $default_stations = $this->stations;
         $default_data = $this->graph_data;
-        $this->template_location;
+        
+        $parameter_options = '';
+        foreach ($this->parameter_names as $key => $name) {
+            $parameter_options .= '<option value=' . $key . '>' . $name . '</option>';
+        }
+        
+        $station_options = '';
+        foreach ($this->stations as $key => $name) {
+            $station_options.= '<option value=' . $key . '>' . $name . '</option>';
+        }
         
         require_once $this->template_location;
         
         return true;
-        
-            
+    }
+    
+    public function printDataJson($graph_data): void {
+        echo json_encode($graph_data);
     }
 }

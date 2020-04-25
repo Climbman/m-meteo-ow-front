@@ -22,6 +22,7 @@ class FactWDB
     
     function __construct(mysqli $conn) {
         $this->db = $conn;
+        $this->db->set_charset('utf8');
     }
     
     
@@ -73,7 +74,7 @@ class FactWDB
             return null;
         }
         
-        $result = [];
+        $result_arr = [];
         
         $sql = $this->db->prepare('
             SELECT
@@ -96,9 +97,9 @@ class FactWDB
         $res = $sql->get_result();
         
         while ($row = $res->fetch_assoc()) {
-            $result[] = $row;
+            $result_arr[] = $row;
         }
         
-        return $result;
+        return $result_arr;
     }
 }

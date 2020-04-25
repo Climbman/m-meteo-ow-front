@@ -9,23 +9,6 @@ spl_autoload_register(function ($class) {
 });
 session_start();
 
-// login
-if (
-    $_SERVER['REQUEST_METHOD'] === 'POST'
-    && isset($_POST['login'], $_POST['user'], $_POST['pass'])
-    && isset(Config::$app_users[$_POST['user']])
-    && Config::$app_users[$_POST['user']] === $_POST['pass']
-) {
-    $_SESSION['user'] = $_POST['user'];
-}
-
-if (!isset($_SESSION['user'])) {
-    require_once Config::$page_links['login'];
-    exit();
-}
-
-//render default
-
 $db = new mysqli(
     Config::$dbconf['srv'],
     Config::$dbconf['usr'],
@@ -33,19 +16,13 @@ $db = new mysqli(
     Config::$dbconf['db'],
     Config::$dbconf['port']
 );
-$db->set_charset('utf8');
 
 $data = new FactWDB($db);
+$view = new View();
 
-$stations = $data->getStations();
+$control = new Control($data, $view);
 
-$start_date = date('Y-m-d');
-$end_date = date('Y-m-d', (time() + 86400));
+$control->checkLogin();
 
-$graph_data = $data->getWeatherData(Config::$defaults['station'], $start_date, $end_date);
-
-var_dump($stations);
-var_dump($graph_data);
-
-exit();
+$control->generateResponse();
 ?>
