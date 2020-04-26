@@ -22,7 +22,5 @@ $view = new View();
 
 $control = new Control($data, $view);
 
-$control->checkLogin();
-
 $control->generateResponse();
 ?>

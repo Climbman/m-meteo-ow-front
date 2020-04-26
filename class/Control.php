@@ -7,8 +7,8 @@
 class Control
 {
     
-    private $view = null;
-    private $data = null;
+    protected $view = null;
+    protected  $data = null;
     
 
     /**
@@ -19,56 +19,59 @@ class Control
         
     }
     
-    public function checkLogin(): void {
-        if (
+    protected function loginCheck(): bool {
+        
+        if (isset($_SESSION['user'])) {
+            return true;
+        } elseif (
             $_SERVER['REQUEST_METHOD'] === 'POST'
             && isset($_POST['login'], $_POST['user'], $_POST['pass'])
             && isset(Config::$app_users[$_POST['user']])
             && Config::$app_users[$_POST['user']] === $_POST['pass']
-            ) {
-                $_SESSION['user'] = $_POST['user'];
-            }
-            
-        if (!isset($_SESSION['user'])) {
-            $this->view->renderLoginPage();
-            exit();
-        }   
+        ) {
+            $_SESSION['user'] = $_POST['user'];
+            return true;
+        }
+        return false;
     }
     
     public function generateResponse() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
-            $stations = $this->data->getStations();
-            
-            $graph_data = $this->data->getWeatherData(
-                Config::$defaults['station'],
-                date('Y-m-d'),
-                date('Y-m-d', (time() + 86400))
-            );
-            
-            $this->view->renderMainView(
-                Config::$param_names,
-                Config::$defaults['parameter'],
-                $stations,
-                $graph_data,
-                Config::$page_links['graph']
-            );
+        
+        if (!$this->loginCheck()) {
+            $this->view->renderLoginPage();
             exit();
         }
-        if (
-            $_SERVER['REQUEST_METHOD'] === 'GET'
-            && isset($_GET['station'])
-            && isset($_GET['st_date'], $_GET['nd_date'])
-            
-        ) {
-            $graph_data = $this->data->getWeatherData(
-                $_GET['station'],
-                $_GET['st_date'],
-                $_GET['nd_date']
-            );
-            
-            $this->view->printDataJson($graph_data);
-            exit();
+        
+        switch($_SERVER['REQUEST_METHOD']) {
+            case 'POST':
+                $stations = $this->data->getStations();
+                
+                $graph_data = $this->data->getWeatherData(
+                    Config::$defaults['station'],
+                    date('Y-m-d'),
+                    date('Y-m-d', (time() + 86400))
+                );
+                
+                $this->view->renderMainView(
+                    Config::$param_names,
+                    Config::$defaults['parameter'],
+                    $stations,
+                    $graph_data,
+                    Config::$page_links['graph']
+                );
+                exit();
+                break;
+            case 'GET':
+                if (isset($_GET['station'], $_GET['st_date'], $_GET['nd_date'])) {
+                    $graph_data = $this->data->getWeatherData(
+                        $_GET['station'],
+                        $_GET['st_date'],
+                        $_GET['nd_date']
+                    );
+                    $this->view->printDataJson($graph_data);
+                    exit();
+                }
+                break;
         }
     }
     
