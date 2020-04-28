@@ -58,7 +58,7 @@ Class View
      * Renders login page.
      */
     public function renderLoginPage(): void {
-        require_once Config::$page_links['login'];
+        require_once(Config::$page_links['login']);
     }
     
     
@@ -67,49 +67,55 @@ Class View
      * 
      * Performs basic checks to provide default template with non-empty values.
      * 
-     * @param array $parameter_names
+     * @param array $graph_settings
      * @param string $default_parameter
      * @param array $stations
      * @param array $graph_data
      * @param string $template_location
      * @return bool
      */
-    public function renderMainView(array $parameter_names, string $default_parameter, array $stations, array $graph_data, string $template_location): bool {
-        
-        $this->parameter_names = $parameter_names;
-        $this->stations = $stations;
-        $this->graph_data = $graph_data;
-        $this->template_location = $template_location;
-        
-        foreach ($this->default_data_keys as $key) {
-            if (!isset($this->graph_data[$key])) {
-                return false;
-            }
-        }
+    public function renderMainView(array $graph_settings, string $default_parameter, array $stations, array $graph_data, string $template_location): bool {
             
-        if (empty($this->parameter_names)
-            || empty($this->stations)
-            || empty($this->template_location)
+        if (empty($graph_settings)
+            || empty($stations)
+            || empty($template_location)
         ) {
             return false;
         }
         
+        $labels = [];
+        $values = [];
+        foreach ($graph_data as $row) {
+            $labels[] = $row[Config::$sql_data_key];
+            $values[] = $row[$default_parameter];
+        }
         
-        //Parameters for template
-        $default_parameter = $this->default_parameter;
-        $default_data = $this->graph_data;
+        $parameter_names = [];
+        foreach($graph_settings as $param => $param_settings) {
+            $parameter_names[$param] = $param_settings['name_lt'];
+        }
         
         $parameter_options = '';
-        foreach ($this->parameter_names as $key => $name) {
+        foreach ($parameter_names as $key => $name) {
             $parameter_options .= '<option value=' . $key . '>' . $name . '</option>';
         }
         
         $station_options = '';
-        foreach ($this->stations as $key => $name) {
+        foreach ($stations as $key => $name) {
             $station_options.= '<option value=' . $key . '>' . $name . '</option>';
         }
         
-        require_once $this->template_location;
+        //Parameters for template
+        $default_data = [
+            'labels' => implode(',', $labels),
+            'values' => implode(',', $values),
+            'line_color' => $graph_settings[$default_parameter]['line_color'],
+            'point_color' => $graph_settings[$default_parameter]['point_color'],
+            'line_display' => $graph_settings[$default_parameter]['show_line'],
+            'graph_label' => $graph_settings[$default_parameter]['name_lt']
+        ];
+        
+        require_once($template_location);
         
         return true;
     }

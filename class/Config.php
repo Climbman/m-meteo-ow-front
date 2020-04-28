@@ -11,7 +11,7 @@ Class Config
     ];
     
     public static $page_links = [
-        'login' => 'login.php',
+        'login' => 'templates/login.php',
         'graph' => 'templates/graph_page.php'
     ];
     
@@ -30,22 +30,26 @@ Class Config
         'temp' => [
             "line_color" => 'red',
             "point_color" => 'red',
-            "show_line" => true
+            "show_line" => 1,
+            "name_lt" => 'Temperatūra'
         ],
         'press' => [
             "line_color" => 'blue',
             "point_color" => 'blue',
-            "show_line" => true
+            "show_line" => 1,
+            "name_lt" => 'Slėgis'
         ],
         'wind_dir' => [
             "line_color" => 'green',
             "point_color" => 'green',
-            "show_line" => false
+            "show_line" => 0,
+            "name_lt" => 'Vėjo kryptis'
         ],
         'wind_gust' => [
             "line_color" => 'cyan',
             "point_color" => 'cyan',
-            "show_line" => true
+            "show_line" => 1,
+            "name_lt" => 'Vėjo gūsiai'
         ]
     ];
     
@@ -53,6 +57,8 @@ Class Config
         'parameter' => 'temp',
         'station' => 19
     ];
+    
+    public static $sql_data_key = 'f_date';
     
     public static function getMetParamNames(): array {
         return array_keys(self::$param_names);

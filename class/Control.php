@@ -44,7 +44,6 @@ class Control
         
         switch($_SERVER['REQUEST_METHOD']) {
             case 'POST':
-                $stations = $this->data->getStations();
                 
                 $graph_data = $this->data->getWeatherData(
                     Config::$defaults['station'],
@@ -53,42 +52,39 @@ class Control
                 );
                 
                 $this->view->renderMainView(
-                    Config::$param_names,
+                    Config::$graph_settings,
                     Config::$defaults['parameter'],
-                    $stations,
+                    $this->data->getStations(),
                     $graph_data,
                     Config::$page_links['graph']
                 );
-                exit();
                 break;
             case 'GET':
-                if (isset($_GET['station'], $_GET['st_date'], $_GET['nd_date'])) {
+                
+                if (isset($_GET['ajax'], $_GET['station'], $_GET['st_date'], $_GET['nd_date'])) {
                     $graph_data = $this->data->getWeatherData(
                         $_GET['station'],
                         $_GET['st_date'],
                         $_GET['nd_date']
                     );
                     $this->view->printDataJson($graph_data);
-                    exit();
+                } else {
+                    $graph_data = $this->data->getWeatherData(
+                        Config::$defaults['station'],
+                        date('Y-m-d'),
+                        date('Y-m-d', (time() + 86400))
+                    );
+                    $this->view->renderMainView(
+                        Config::$graph_settings,
+                        Config::$defaults['parameter'],
+                        $this->data->getStations(),
+                        $graph_data,
+                        Config::$page_links['graph']
+                    );
                 }
+                exit();
                 break;
         }
-    }
-    
-    public function test() {
-        
-        $data = $this->data;
-        
-        
-        $stations = $data->getStations();
-        
-        $start_date = date('Y-m-d');
-        $end_date = date('Y-m-d', (time() + 86400));
-        
-        $graph_data = $data->getWeatherData(Config::$defaults['station'], $start_date, $end_date);
-        
-        var_dump($stations);
-        var_dump($graph_data);
     }
     
 }

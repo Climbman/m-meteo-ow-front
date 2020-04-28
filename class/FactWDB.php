@@ -78,7 +78,7 @@ class FactWDB
         
         $sql = $this->db->prepare('
             SELECT
-                date_time,
+                date_time as ' . Config::$sql_data_key . ',
                 cond_code,
                 cond_txt,
                 temp,
