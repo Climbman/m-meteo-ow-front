@@ -1,6 +1,11 @@
 /* GENERAL */
+/* top color #FFCCFF
+ * bottom color: #6699FF
+*/
 body {
     font-family: arial,sans-serif;
+    /*background-color: #f2f2f2;*/
+    background-color: salmon;
 }
 
 .transition03 {
@@ -55,8 +60,8 @@ body {
 
 /* LOGIN PAGE */\
 
-.login-body {
-    
+body.login-body {
+   background-color: #d9d9d9;
 }
 
 .login-form-holder {
@@ -64,16 +69,26 @@ body {
     left: 50%;
     top: 10%;
     transform: translate(-50%, -10%);
-    width: 350px;
-    margin: 0px;
-    padding: 100px;
-    border: 1px darkgray solid;
-    border-radius: 5px;
-    box-shadow: 3px 3px #c1c1c1;
+    min-width: 350px;
+    width: auto;
+    height: auto;
 }
 
-.login-form-holder:hover {
-    box-shadow: 6px 6px #c9c9c9;
+.login-form {
+    display: block;
+    margin: 10px;
+    padding: 50px;
+    /*background-color: #f9f9f9;*/
+    background-color: #ffccff;
+    border: 1px darkgray solid;
+    border-radius: 5px;
+    box-shadow: 2px 2px #c1c1c1;
+}
+
+.login-form:hover {
+    box-shadow: 4px 4px #c9c9c9;
+    /*background-color: #ffffff;*/
+    background-color: #d9bfff;
 }
 
 .heading1 {
@@ -87,11 +102,13 @@ body {
 .login-txt-field {
     display: block;
     margin: auto;
-    max-width: 200px;
+    width: 150px;
+    height: 30px;
     padding: 5px;
     margin-bottom: 5px;
     border: 2px black solid;
     border-radius: 3px;
+    font-size: 1.5em;
 }
 
 .login-txt-field:hover {
@@ -101,16 +118,20 @@ body {
 .login-button {
     display: block;
     margin: auto;
-    width: 100px;
-    border: 1px black solid;
+    width: 150px;
+    height: 30px;
+    border: 2px black solid;
     border-radius: 5px;
     padding: 5px;
     margin-top: 20px;
     text-align: center;
+    background-color: #ffffff;
+    font-size: 1.5em;
 }
 
 .login-button:hover {
     background-color: #dddddd;
+    cursor: pointer;
 }
 
 
