@@ -12,6 +12,10 @@ body {
     transition: 0.3s;
 }
 
+.graph-block {
+    background-color: #faebd7;
+}
+
 #index_body {
     background-color: DarkSalmon;
 }

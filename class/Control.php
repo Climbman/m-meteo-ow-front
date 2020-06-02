@@ -19,7 +19,7 @@ class Control
         
     }
     
-    protected function loginCheck(): bool {
+    public function loginCheck(): bool {
         
         if (isset($_SESSION['user'])) {
             return true;
@@ -44,47 +44,41 @@ class Control
         
         switch($_SERVER['REQUEST_METHOD']) {
             case 'POST':
-                
-                $graph_data = $this->data->getWeatherData(
-                    Config::$defaults['station'],
-                    date('Y-m-d'),
-                    date('Y-m-d', (time() + 86400))
-                );
-                
-                $this->view->renderMainView(
-                    Config::$graph_settings,
-                    Config::$defaults['parameter'],
-                    $this->data->getStations(),
-                    $graph_data,
-                    Config::$page_links['graph']
-                );
+                $this->renderWithDefaults();
                 break;
             case 'GET':
-                
                 if (isset($_GET['ajax'], $_GET['station'], $_GET['st_date'], $_GET['nd_date'])) {
-                    $graph_data = $this->data->getWeatherData(
-                        $_GET['station'],
-                        $_GET['st_date'],
-                        $_GET['nd_date']
-                    );
-                    $this->view->printDataJson($graph_data);
+                    $this->echoDataForAjax();
                 } else {
-                    $graph_data = $this->data->getWeatherData(
-                        Config::$defaults['station'],
-                        date('Y-m-d'),
-                        date('Y-m-d', (time() + 86400))
-                    );
-                    $this->view->renderMainView(
-                        Config::$graph_settings,
-                        Config::$defaults['parameter'],
-                        $this->data->getStations(),
-                        $graph_data,
-                        Config::$page_links['graph']
-                    );
+                    $this->renderWithDefaults();
                 }
-                exit();
                 break;
         }
+    }
+
+    protected function renderWithDefaults(): void {
+        $graph_data = $this->data->getWeatherData(
+            Config::$defaults['station'],
+            date('Y-m-d'),
+            date('Y-m-d', (time() + 86400))
+        );
+
+        $this->view->renderMainView(
+            Config::$graph_settings,
+            Config::$defaults['parameter'],
+            $this->data->getStations(),
+            $graph_data,
+            Config::$page_links['graph']
+        );
+    }
+
+    protected function echoDataForAjax(): void {
+        $graph_data = $this->data->getWeatherData(
+            $_GET['station'],
+            $_GET['st_date'],
+            $_GET['nd_date']
+        );
+        $this->view->printDataJson($graph_data);
     }
     
 }

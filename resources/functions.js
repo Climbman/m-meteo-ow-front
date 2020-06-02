@@ -28,7 +28,7 @@ function getGraphConfig(labels, values, graph_label, line_color, point_color, li
         },
         options: {}
     }
-    return graph_config;
+    return graph_config; //can return previous expression right away
 }
 
 /**
