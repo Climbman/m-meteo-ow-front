@@ -16,57 +16,25 @@ body {
     background-color: #faebd7;
 }
 
-#index_body {
-    background-color: DarkSalmon;
+.content-container {
+    margin: 0px 5px 0px 5px;
 }
 
-.v_separator {
-    height: 20px;
-    width: 100%;
+.graph-block {
+    display: block;
+    margin: auto;
+    height: 500px;
+    width: auto;
+    max-width: 1000px;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 
-#graph_iframe {
-    width:1200px;
-    height:600px;
-    position: fixed;
-    top: 0px;
-    left: 160px;
-    overflow: hidden;
-    background-color: White;
-    border-right: 4px solid SaddleBrown;
-    border-bottom: 4px solid SaddleBrown;
+.graph-holder {
+    width: 1000px
 }
 
-.graph_data {
-    display: none;
-}
-
-#sidebar {
-    height: 100%;
-    width: 160px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: Blue;
-    overflow-x: hidden;
-    padding-top: 20px;
-    border-right: 4px solid RebeccaPurple;
-}
-
-#msg_box {
-    height: 150px;
-    width: 90%;
-    background-color: white;
-    overflow-y: scroll;
-    overflow-x: disabled;
-}
-
-/* LOGIN PAGE */\
-
-body.login-body {
-   background-color: #d9d9d9;
-}
+/* LOGIN PAGE */
 
 .login-form-holder {
     position: absolute;
