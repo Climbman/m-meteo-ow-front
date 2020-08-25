@@ -17,10 +17,9 @@ spl_autoload_register(function ($class) {
         Config::$dbconf['port']
         );
     
-    $data = new FactWDB($db);
-    $view = new View();
+    $controller = new Control(
+        new FactWDB($db),
+        new View()
+    );
     
-    $control = new Control($data, $view);
-    
-    $control->generateResponse();
-?>
+    $controller->generateResponse();

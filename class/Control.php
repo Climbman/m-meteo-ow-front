@@ -8,7 +8,7 @@ class Control
 {
     
     protected $view = null;
-    protected  $data = null;
+    protected $data = null;
     
 
     /**
@@ -19,7 +19,7 @@ class Control
         
     }
     
-    public function loginCheck(): bool {
+    private function loginCheck(): bool {
         
         if (isset($_SESSION['user'])) {
             return true;
@@ -43,15 +43,16 @@ class Control
         }
         
         switch($_SERVER['REQUEST_METHOD']) {
-            case 'POST':
-                $this->renderWithDefaults();
-                break;
             case 'GET':
                 if (isset($_GET['ajax'], $_GET['station'], $_GET['st_date'], $_GET['nd_date'])) {
                     $this->echoDataForAjax();
                 } else {
                     $this->renderWithDefaults();
                 }
+                break;
+            case 'POST':
+            default:
+                $this->renderWithDefaults();
                 break;
         }
     }
